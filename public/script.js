@@ -64,10 +64,10 @@ $('#image-list > img').on('click', function(event){
   // Draw the image into it
   ctx.drawImage(this, 0, 0, canvas.width, canvas.height);
   // Get the image pixel data
-  var data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+  var data = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
   // TODO: Process Data
   var worker = new Worker("grayscale.js");
-  worker.postMessage(data);
+  worker.postMessage(data, [data]);
   worker.onmessage = function(event) {
     ctx.putImageData(event.data, 0, 0);
     image.src = canvas.toDataURL();

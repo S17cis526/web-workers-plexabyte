@@ -6,7 +6,7 @@ onmessage = function(event) {
   console.log(event);
   var data = event.data;
   // Process each pixel separately
-  for (var i = 0; i < l; i += 4) {
+  for (var i = 0; i < data.length; i += 4) {
         var r = data[i];
         var g = data[i + 1];
         var b = data[i + 2];
@@ -21,5 +21,5 @@ onmessage = function(event) {
         binaryData[i + 2] = value;
     }
     // Send the transformed data back to the main thread
-    postMessage(data);
+    postMessage(data, [data]);
 }
